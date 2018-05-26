@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 """reqmefile
 Usage:
-  reqmefile [-g <google_api_key>] [-d <dropbox_api_key>] [-p <path>] -t <title>
+  reqmefile.py [-g <google_api_key>] [-d <dropbox_api_key>] [-p <path>] -t <title>
 
 Options:
   -g <google_api_key>   google api key, if none, it will read from env `REQMEFILE_DROPBOX_API`
@@ -23,7 +23,7 @@ def imp(dapi, gapi, path, title):
     client = Dropbox(dapi)
     resp = client.file_requests_create(title, path)
 
-    req = requests.post(f"{GOOGLE_URL}?key={gapi}", json={"longUrl": resp.url})
+    req = requests.post("{}?key={}".format(GOOGLE_URL, gapi), json={"longUrl": resp.url})
     print("File request URL is:", req.json()["id"])
 
 
